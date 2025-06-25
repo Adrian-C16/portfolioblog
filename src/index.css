@@ -1,0 +1,399 @@
+:root {
+    --bg-main: #fff;
+    --bg-alt: #f9f9f9;
+    --navbar-bg: #fff;
+    --navbar-border: #ddd;
+    --footer-border: #ddd;
+    --footer-text: #555;
+    --text-main: #222;
+    --text-strong: #1a202c;
+    --text-logo: #0077cc;
+    --text-logo-span: #333;
+    --link-main: #333;
+    --link-hover: #0077cc;
+    --post-title: #2c5282;
+    --post-excerpt: #4a5568;
+    --post-meta: #718096;
+    --post-meta-light: #888;
+    --card-bg: #fff;
+    --card-border: #ddd;
+    --card-shadow: rgba(0,0,0,0.05);
+    --card-shadow-hover: rgba(0,0,0,0.12);
+    --form-border: #ccc;
+    --form-bg: #fff;
+    --form-btn: #3182ce;
+    --form-btn-hover: #2b6cb0;
+    --danger-btn: #e53e3e;
+    --danger-btn-hover: #c53030;
+    --admin-table-header-bg: #f7fafc;
+    --admin-table-border: #e2e8f0;
+    --toggle-hover: #eee;
+}
+
+body.dark-theme {
+    --bg-main: #181818;
+    --bg-alt: #23272f;
+    --navbar-bg: #23272f;
+    --navbar-border: #333;
+    --footer-border: #333;
+    --footer-text: #ddd;
+    --text-main: #ddd;
+    --text-strong: #fff;
+    --text-logo: #63b3ed;
+    --text-logo-span: #ccc;
+    --link-main: #ddd;
+    --link-hover: #63b3ed;
+    --post-title: #90cdf4;
+    --post-excerpt: #a0aec0;
+    --post-meta: #a0aec0;
+    --post-meta-light: #888;
+    --card-bg: #23272f;
+    --card-border: #333;
+    --card-shadow: rgba(0,0,0,0.12);
+    --card-shadow-hover: rgba(0,0,0,0.28);
+    --form-border: #444;
+    --form-bg: #181818;
+    --form-btn: #3182ce;
+    --form-btn-hover: #2b6cb0;
+    --danger-btn: #e53e3e;
+    --danger-btn-hover: #c53030;
+    --admin-table-header-bg: #23272f;
+    --admin-table-border: #333;
+    --toggle-hover: #333;
+}
+
+/* Body backgrounds and texts */
+body, .home, .post-detail, .post-form, .admin-panel {
+    background: var(--bg-main);
+    color: var(--text-main);
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--navbar-bg);
+    border-bottom: 1px solid var(--navbar-border);
+    padding: 1rem 0;
+}
+
+.navbar-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-logo);
+    text-decoration: none;
+}
+
+.navbar-logo span {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--text-logo-span);
+}
+
+.react-logo-rotate {
+    transition: transform 0.2s;
+}
+
+.navbar-logo:hover .react-logo-rotate {
+    animation: react-rotate 2s linear infinite;
+}
+
+@keyframes react-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.navbar-links a {
+    margin-left: 1.5rem;
+    color: var(--link-main);
+    text-decoration: none;
+    font-weight: 500;
+}
+.navbar-links a:hover {
+    color: var(--link-hover);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--bg-alt);
+    border-top: 1px solid var(--footer-border);
+    padding: 1.5rem 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--footer-text);
+    margin-top: 3rem;
+}
+
+.footer-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    text-align: center;
+}
+
+.footer-container p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--footer-text);
+}
+
+/* Post meta */
+.post-meta {
+    font-size: 0.85rem;
+    color: var(--post-meta);
+    margin-bottom: 0.5rem;
+}
+
+/* Home */
+.home {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-main);
+}
+.home-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--text-strong);
+}
+
+.post-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.75rem;
+}
+
+/* Post Card */
+.post-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 1.5rem 1.25rem;
+    box-shadow: 0 2px 5px var(--card-shadow);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: default;
+    margin-bottom: 1.5rem;
+}
+.post-card:hover {
+    box-shadow: 0 8px 20px var(--card-shadow-hover);
+    transform: translateY(-4px);
+}
+
+.post-title, .post-card-title {
+    font-size: 1.35rem;
+    color: var(--post-title);
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.post-card-title {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.post-excerpt, .post-card-excerpt {
+    color: var(--post-excerpt);
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 1.2rem;
+}
+.post-card-excerpt {
+    margin-bottom: 1rem;
+}
+
+.read-more,
+.post-card-link {
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--form-btn);
+    transition: color 0.2s ease;
+}
+.read-more:hover,
+.post-card-link:hover {
+    color: var(--form-btn-hover);
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .home-title {
+        font-size: 2rem;
+    }
+    .post-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Post Detail */
+.post-detail {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-strong);
+}
+.post-title {
+    font-size: 2.3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--post-title);
+}
+.post-meta {
+    font-size: 0.9rem;
+    color: var(--post-meta);
+    margin-bottom: 2rem;
+}
+.post-content p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    color: var(--text-logo-span);
+}
+
+.not-found {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+/* Post Form */
+.post-form {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-strong);
+}
+.post-form h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.post-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.post-form label {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+.post-form input,
+.post-form textarea {
+    padding: 0.6rem;
+    border: 1px solid var(--form-border);
+    border-radius: 5px;
+    font-size: 1rem;
+    resize: vertical;
+    background: var(--form-bg);
+    color: var(--text-main);
+}
+.post-form button {
+    background-color: var(--form-btn);
+    color: white;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.post-form button:hover {
+    background-color: var(--form-btn-hover);
+}
+
+/* Admin Panel */
+.admin-panel {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.admin-panel h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+.admin-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+.admin-button {
+    background-color: var(--form-btn);
+    color: white;
+    padding: 0.5rem 0.8rem;
+    border: none;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.admin-button:hover {
+    background-color: var(--form-btn-hover);
+}
+.admin-button.small {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+}
+.admin-button.danger {
+    background-color: var(--danger-btn);
+}
+.admin-button.danger:hover {
+    background-color: var(--danger-btn-hover);
+}
+
+/* Admin Table */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.admin-table th,
+.admin-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--admin-table-border);
+    text-align: left;
+}
+.admin-table th {
+    background-color: var(--admin-table-header-bg);
+    font-weight: 600;
+}
+.admin-table td {
+    background-color: var(--card-bg);
+    color: var(--text-main);
+}
+
+/* Theme toggle */
+.theme-toggle-btn {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-left: 1rem;
+    padding: 0.4em 0.7em;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+.theme-toggle-btn:hover {
+    background: var(--toggle-hover);
+}
+body.dark-theme .theme-toggle-btn:hover {
+    background: var(--toggle-hover);
+}
