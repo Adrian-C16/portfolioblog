@@ -2,7 +2,7 @@ import '../index.css';
 import {Link} from 'react-router-dom';
 import {posts} from '../data/posts.js';
 import HeroIntro from '../components/HeroIntro.jsx';
-//import PostCard from '../components/PostCard.jsx'; 
+ 
 
 
 function Home() {
@@ -19,7 +19,7 @@ function Home() {
                             Publicado por {post.author} el {post.date}
                         </p>
                         <Link to = {`/post/${post.id}`} className='read-more'>
-                        Leer más →
+                            Leer más →
                         </Link>
                     </div>
                 ))}

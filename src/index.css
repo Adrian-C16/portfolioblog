@@ -397,3 +397,84 @@ body, .home, .post-detail, .post-form, .admin-panel {
 body.dark-theme .theme-toggle-btn:hover {
     background: var(--toggle-hover);
 }
+
+/* Estilos para el avatar */
+.hero-intro-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.avatar-area {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar-emoji {
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  cursor: pointer;
+}
+
+/* Estilos para la animación del brazo */
+.react-avatar-hand-group {
+  transform-origin: 83px 67px;
+  animation: reactAvatarWave 1.4s infinite;
+}
+
+@keyframes reactAvatarWave {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(20deg); }
+  20% { transform: rotate(-10deg); }
+  30% { transform: rotate(15deg); }
+  40% { transform: rotate(-3deg); }
+  50% { transform: rotate(10deg); }
+  60%, 100% { transform: rotate(0deg); }
+}
+
+/* Estilos para el globo de diálogo */
+.speech-bubble {
+  position: absolute;
+  top: -80px;
+  left: 150px;
+  background: var(--card-bg);
+  color: var(--text-main);
+  border: 2px solid var(--text-logo);
+  border-radius: 10px;
+  padding: 15px;
+  width: 250px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.close-bubble {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  color: var(--text-main);
+  cursor: pointer;
+  font-size: 1.2em;
+  opacity: 0.7;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.close-bubble:hover {
+  opacity: 1;
+  color: var(--link-hover);
+}
+
+/* Asegurar que el texto dentro del globo herede los colores correctos */
+.speech-bubble p {
+  color: inherit;
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+}
+
+.speech-bubble p:last-child {
+  margin-bottom: 0;
+}

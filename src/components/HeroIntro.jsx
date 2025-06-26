@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "../index.css";
+import ReactAvatar from "./ReactAvatar";
+import PropTypes from "prop-types";
 
 const STORAGE_KEY = "heroIntroBubbleShown";
 
@@ -27,9 +29,15 @@ const handleAvatarClick = () => setShowBubble(true);
 return (
     <section className="hero-intro-avatar">
         <div className="avatar-area">
-            <div className="avatar-wave" aria-label="Avatar saludando">
-                <span role="img" aria-label="Adrián saluda" className="avatar-emoji">avatar</span>
-                <span className="avatar-hand"></span>
+            <div className="avatar-wave" aria-label="Avatar saludando"
+            tabIndex={0}
+            onClick={handleAvatarClick}
+            onKeyDown={e => (e.key === "Enter" || e.key === " ") && handleAvatarClick()}
+            style={{ cursor: "pointer" }}
+            >
+                <div className="avatar-emoji">
+                  <ReactAvatar />
+                </div>
             </div>
             {showBubble && (
                 <div className="speech-bubble">

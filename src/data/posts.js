@@ -1,4 +1,4 @@
-export const posts = [
+export const posts = [ // integrar proyectos en esta parte me sirve en este formato. 
     {
         id: 1,
     title: 'Cómo empezar con React',
