@@ -16,15 +16,23 @@ function PostForm ({isEditing = false}) {
         excerpt: '',
         content: '',
         author: '',
+        image: '',
+        repo: '',
+        demo: '',
+        tags: '',
     });
 
     useEffect(() => {
         if (isEditing && postToEdit) {
             setFormData({
-                title: postToEdit.title,
-                excerpt: postToEdit.excerpt,
-                content: postToEdit.content,
-                author: postToEdit.author,
+                title: postToEdit.title ||'',
+                excerpt: postToEdit.excerpt || '',
+                content: postToEdit.content || '',
+                author: postToEdit.author || '',
+                image: postToEdit.image || '',
+                repo: postToEdit.repo || '',
+                demo: postToEdit.demo || '',
+                tags: postToEdit.tags ? postToEdit.tags.join(","): ''
             });
         }
     }, [isEditing, postToEdit]);
@@ -40,10 +48,15 @@ function PostForm ({isEditing = false}) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        const postData = {
+            ...formData,
+            tags: formData.tags.split(",").map(t => t.trim()).filter(Boolean)
+        };
+
         if (isEditing) {
-            console.log('Post actualiado: ', {id, ...formData});
+            console.log('Post actualiado: ', {id, ...postData});
         } else {
-            console.log('Nuevo post creado: ', formData);
+            console.log('Nuevo post creado: ', postData);
         }
 
         navigate('/');
@@ -87,6 +100,39 @@ function PostForm ({isEditing = false}) {
                     onChange={handleChange}
                     required
                 />
+
+                <label>Imagen</label>
+                <input
+                    type="text"
+                    name="image"
+                    value={formData.image}
+                    onChange={handleChange}
+                />
+
+                <label>Tags</label>
+                <input
+                    type="text"
+                    name="tags"
+                    value={formData.tags}
+                    onChange={handleChange}
+                    placeholder="react, javascript, portfolio"
+                />
+
+                <label>Repositorio</label>
+                <input
+                    type="text"
+                    name="repo"
+                    value={formData.repo}
+                    onChange={handleChange}
+                />
+
+                <label>Demo</label>
+                <input 
+                    type="text" 
+                    name="demo"
+                    value={formData.demo}
+                    onChange={handleChange}
+                    />
 
                 <button type="submit">{isEditing ? 'Actualizar' : 'Publicar'}</button>
             </form>
