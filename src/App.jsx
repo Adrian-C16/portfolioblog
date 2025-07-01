@@ -16,11 +16,11 @@ function App() {
 
             <main className="main-content">
                 <Routes>
-                    <Route path = "/" element = {<Home />} />
-                    <Route path = "/post/:id" element = {<PostDetail />} />
-                    <Route path = "new" element = {<PostForm />} />
-                    <Route path = "/edit/:id" element = {<PostForm isEditing={true} />} />
-                    <Route path = "/admin" element = {<AdminPanel />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/post/:id" element={<PostDetail />} />
+                    <Route path="/new" element={<PostForm />} />
+                    <Route path="/edit/:id" element={<PostForm isEditing={true} />} />
+                    <Route path="/admin" element={<AdminPanel />} />
                 </Routes>
             </main>
 

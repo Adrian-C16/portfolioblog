@@ -16,11 +16,15 @@ function PostForm ({isEditing = false}) {
         excerpt: '',
         content: '',
         author: '',
+        date: new Date().toISOString().split('T')[0], // Fecha actual por defecto
         image: '',
         repo: '',
         demo: '',
         tags: '',
     });
+
+    const [errors, setErrors] = useState({});
+    const [submitStatus, setSubmitStatus] = useState({ success: false, message: '' });
 
     useEffect(() => {
         if (isEditing && postToEdit) {
@@ -29,6 +33,7 @@ function PostForm ({isEditing = false}) {
                 excerpt: postToEdit.excerpt || '',
                 content: postToEdit.content || '',
                 author: postToEdit.author || '',
+                date: postToEdit.date || new Date().toISOString().split('T')[0],
                 image: postToEdit.image || '',
                 repo: postToEdit.repo || '',
                 demo: postToEdit.demo || '',
@@ -45,27 +50,92 @@ function PostForm ({isEditing = false}) {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const validateUrl = (url) => {
+        if (!url) return true; // URL vacía es válida (opcional)
+        try {
+            new URL(url);
+            return true;
+        } catch {
+            return false;
+        }
+    };
+
+    const validateForm = () => {
+        const newErrors = {};
+        
+        if (!formData.title.trim()) newErrors.title = 'El título es obligatorio';
+        if (!formData.content.trim()) newErrors.content = 'El contenido es obligatorio';
+        if (formData.image && !validateUrl(formData.image)) newErrors.image = 'URL de imagen no válida';
+        if (formData.repo && !validateUrl(formData.repo)) newErrors.repo = 'URL de repositorio no válida';
+        if (formData.demo && !validateUrl(formData.demo)) newErrors.demo = 'URL de demo no válida';
+        
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const postData = {
-            ...formData,
-            tags: formData.tags.split(",").map(t => t.trim()).filter(Boolean)
-        };
-
-        if (isEditing) {
-            console.log('Post actualiado: ', {id, ...postData});
-        } else {
-            console.log('Nuevo post creado: ', postData);
+        
+        if (!validateForm()) {
+            setSubmitStatus({ success: false, message: 'Por favor, corrige los errores en el formulario.' });
+            return;
         }
 
-        navigate('/');
+        try {
+            const postData = {
+                ...formData,
+                date: formData.date || new Date().toISOString(),
+                tags: formData.tags ? formData.tags.split(",").map(t => t.trim()).filter(Boolean) : []
+            };
+
+            // Simular una llamada a la API
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            if (isEditing) {
+                console.log('Post actualizado: ', { id, ...postData });
+                setSubmitStatus({ success: true, message: 'Proyecto actualizado exitosamente.' });
+            } else {
+                console.log('Nuevo post creado: ', postData);
+                setSubmitStatus({ success: true, message: 'Proyecto creado exitosamente.' });
+                // Resetear el formulario después de un envío exitoso
+                setFormData({
+                    title: '',
+                    excerpt: '',
+                    content: '',
+                    author: '',
+                    date: new Date().toISOString().split('T')[0],
+                    image: '',
+                    repo: '',
+                    demo: '',
+                    tags: ''
+                });
+            }
+            
+            // Redirigir después de 2 segundos
+            setTimeout(() => {
+                navigate('/');
+            }, 2000);
+            
+        } catch (error) {
+            console.error('Error al guardar el proyecto:', error);
+            setSubmitStatus({ 
+                success: false, 
+                message: 'Ocurrió un error al guardar el proyecto. Por favor, inténtalo de nuevo.' 
+            });
+        }
     };
 
     return (
         <div className="post-form">
-            <h2>{isEditing ? 'Editar Post' : 'Nuevo Post'}</h2>
-            <form onSubmit={handleSubmit}>
+            <h2>{isEditing ? 'Editar Proyecto' : 'Nuevo Proyecto'}</h2>
+            
+            {submitStatus.message && (
+                <div className={`form-message ${submitStatus.success ? 'success' : 'error'}`}>
+                    {submitStatus.message}
+                </div>
+            )}
+            
+            <form onSubmit={handleSubmit} noValidate>
                 <label>Título</label>
                 <input
                     type="text"
@@ -73,7 +143,9 @@ function PostForm ({isEditing = false}) {
                     value={formData.title}
                     onChange={handleChange}
                     required
+                    className={errors.title ? 'error-input' : ''}
                 />
+                {errors.title && <span className="error-message">{errors.title}</span>}
 
                 <label>Extracto</label>
                 <textarea
@@ -90,24 +162,58 @@ function PostForm ({isEditing = false}) {
                     onChange={handleChange}
                     rows="7"
                     required
+                    className={errors.content ? 'error-input' : ''}
                 />
+                {errors.content && <span className="error-message">{errors.content}</span>}
 
-                <label>Autor</label>
-                <input
-                    type="text"
-                    name="author"
-                    value={formData.author}
-                    onChange={handleChange}
-                    required
-                />
+                <div className="form-group">
+                    <label>Fecha</label>
+                    <input
+                        type="date"
+                        name="date"
+                        value={formData.date}
+                        onChange={handleChange}
+                        className={errors.date ? 'error-input' : ''}
+                    />
+                    {errors.date && <span className="error-message">{errors.date}</span>}
+                </div>
 
-                <label>Imagen</label>
-                <input
-                    type="text"
-                    name="image"
-                    value={formData.image}
-                    onChange={handleChange}
-                />
+                <div className="form-group">
+                    <label>Autor</label>
+                    <input
+                        type="text"
+                        name="author"
+                        value={formData.author}
+                        onChange={handleChange}
+                        className={errors.author ? 'error-input' : ''}
+                    />
+                    {errors.author && <span className="error-message">{errors.author}</span>}
+                </div>
+
+                <div className="form-group">
+                    <label>Imagen (URL)</label>
+                    <input
+                        type="url"
+                        name="image"
+                        value={formData.image}
+                        onChange={handleChange}
+                        placeholder="https://ejemplo.com/imagen.jpg"
+                        className={errors.image ? 'error-input' : ''}
+                    />
+                    {errors.image && <span className="error-message">{errors.image}</span>}
+                    {formData.image && (
+                        <div className="image-preview">
+                            <img 
+                                src={formData.image} 
+                                alt="Vista previa" 
+                                onError={(e) => {
+                                    e.target.onError = null;
+                                    e.target.src = 'https://via.placeholder.com/300x150?text=Imagen+no+disponible';
+                                }}
+                            />
+                        </div>
+                    )}
+                </div>
 
                 <label>Tags</label>
                 <input
@@ -118,23 +224,44 @@ function PostForm ({isEditing = false}) {
                     placeholder="react, javascript, portfolio"
                 />
 
-                <label>Repositorio</label>
-                <input
-                    type="text"
-                    name="repo"
-                    value={formData.repo}
-                    onChange={handleChange}
-                />
-
-                <label>Demo</label>
-                <input 
-                    type="text" 
-                    name="demo"
-                    value={formData.demo}
-                    onChange={handleChange}
+                <div className="form-group">
+                    <label>Repositorio (URL)</label>
+                    <input
+                        type="url"
+                        name="repo"
+                        value={formData.repo}
+                        onChange={handleChange}
+                        placeholder="https://github.com/usuario/repositorio"
+                        className={errors.repo ? 'error-input' : ''}
                     />
+                    {errors.repo && <span className="error-message">{errors.repo}</span>}
+                </div>
 
-                <button type="submit">{isEditing ? 'Actualizar' : 'Publicar'}</button>
+                <div className="form-group">
+                    <label>Demo (URL)</label>
+                    <input
+                        type="url"
+                        name="demo"
+                        value={formData.demo}
+                        onChange={handleChange}
+                        placeholder="https://midemo.com"
+                        className={errors.demo ? 'error-input' : ''}
+                    />
+                    {errors.demo && <span className="error-message">{errors.demo}</span>}
+                </div>
+
+                <div className="form-actions">
+                    <button type="submit" className="submit-button">
+                        {isEditing ? 'Actualizar' : 'Crear'} Proyecto
+                    </button>
+                    <button 
+                        type="button" 
+                        className="cancel-button"
+                        onClick={() => navigate('/')}
+                    >
+                        Cancelar
+                    </button>
+                </div>
             </form>
         </div>
     );
