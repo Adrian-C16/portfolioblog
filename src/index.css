@@ -909,3 +909,222 @@ body.dark-theme .theme-toggle-btn:hover {
 .speech-bubble p:last-child {
   margin-bottom: 0;
 }
+
+/* Estilos para Modal */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 2rem;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    border-radius: 12px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+/*annimación de entrada */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*contenido modal*/
+.project-detail-modal {
+    padding: 2rem;
+}
+
+.project-detail-modal h2 {
+    color: var(--text-strong);
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+.modal-project-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+/* botón cierre */
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-main);
+    padding: 0.5rem;
+    line-height: 1;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.modal-close:hover {
+    background-color: var(--bg-alt);
+}
+
+.project-detail-modal {
+    padding: 2rem;
+    color: var(--text-main);
+}
+
+.project-detail-modal h2 {
+    color: var(--text-strong);
+    margin: 0 0 1.5rem 0;
+    font-size: 2rem;
+    line-height: 1.2;
+}
+
+/*meta*/
+.project-meta {
+    margin: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.project-tag {
+    background: var(--form-btn);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    display: inline-block;
+}
+/**/
+.project-content {
+    margin: 1.5rem 0;
+    line-height: 1.6;
+}
+
+.project-technologies {
+    margin: 2rem 0;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
+}
+
+.project-technologies h4 {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    color: var(--text-strong);
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tech-tag {
+    background: var(--bg-alt);
+    color: var(--text-main);
+    padding: 0.35rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    border: 1px solid var(--card-border);
+}
+
+/*botones*/
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    background: var(--form-btn);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.project-link:hover {
+    background: var(--form-btn-hover);
+    transform: translateY(-2px);
+}
+
+.project-link.demo-link {
+    background: transparent;
+    border: 1px solid var(--form-btn);
+    color: var(--form-btn);
+}
+
+.project-link.demo-link:hover {
+    background: rgba(49, 130, 206, 0.1);
+}
+
+
+
+/*responsive modal*/
+@media (max-width: 768px) {
+    .modal-content {
+        max-width: 95%;
+        padding: 1.5rem;
+    }
+
+    .modal-project-image {
+        max-height: 250px;
+    }
+
+    .project-detail-modal {
+        padding: 1.5rem;
+    }
+
+    .project-detail-modal h2 {
+        font-size: 1.75rem;
+    }
+
+    .project-links {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .project-link {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+}

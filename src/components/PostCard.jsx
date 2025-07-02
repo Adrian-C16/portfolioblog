@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import '../index.css'
 
-function PostCard({ post }) {
+function PostCard({ post, onClick }) {
+    const handleDetailsClick = (e) => {
+        e.stopPropagation();
+    };
+
     return (
-        <div className='project-card'>
+        <div className='project-card' onClick={onClick} style={{ cursor: 'pointer'}}>
             {post.image && (
                 <div className="project-image-container">
                     <img
@@ -32,13 +36,19 @@ function PostCard({ post }) {
                 )}
 
                 <div className="project-links">
-                    <Link to={`/post/${post.id}`} className="project-link">Ver Detalles</Link>
+                    <button
+                        onClick={handleDetailsClick}
+                        className="project-link"
+                    >
+                        Ver Detalles
+                    </button>
                     {post.demo && (
                         <a
                             href={post.demo}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="project-link demo-link"
+                            onClick={ (e) => e.stopPropagation()}
                         >
                             Ver Demo
                         </a>

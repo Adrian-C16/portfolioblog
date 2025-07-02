@@ -18,7 +18,7 @@ function Modal ({ children, onClose }) {
         >
             <div
                 className='modal-content'
-                onClick={e => e.stopePropagation()}
+                onClick={e => e.stopPropagation()}
             >
                 <button
                     className='modal-close'
