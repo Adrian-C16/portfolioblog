@@ -924,6 +924,14 @@ body.dark-theme .theme-toggle-btn:hover {
     align-items: center;
     z-index: 1000;
     padding: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
 }
 
 .modal-content {
@@ -936,6 +944,27 @@ body.dark-theme .theme-toggle-btn:hover {
     position: relative;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     animation: modalFadeIn 0.3s ease-out;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 1001;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 /*annimación de entrada */
@@ -1033,8 +1062,8 @@ body.dark-theme .theme-toggle-btn:hover {
 .project-technologies {
     margin: 2rem 0;
     padding: 1.5rem 0;
-    border-top: 1px solid var(--card-border);
-    border-bottom: 1px solid var(--card-border);
+    border-top: 1px solid var(--card-border, #e2e8f0);
+    border-bottom: 1px solid var(--card-border, #e2e8f0);
 }
 
 .project-technologies h4 {
