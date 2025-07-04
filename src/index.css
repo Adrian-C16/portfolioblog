@@ -919,6 +919,8 @@ body.dark-theme .theme-toggle-btn:hover {
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -927,6 +929,12 @@ body.dark-theme .theme-toggle-btn:hover {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+@supports (backdrop-filter: blur(5px)) or (-webkit-backdrop-filter: blur(5px)) {
+    .modal-overlay {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
 }
 
 .modal-overlay.active {
@@ -946,12 +954,19 @@ body.dark-theme .theme-toggle-btn:hover {
     animation: modalFadeIn 0.3s ease-out;
     transform: translateY(20px);
     opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+    opacity 0.3s ease;
+    will-change: transform, opacity;
     z-index: 1001;
 }
 
+.modal-overlay:not(.active) .modal-content {
+    transform: translateY(20px) scale(0.98);
+    opacity: 0;
+}
+
 .modal-overlay.active .modal-content {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     opacity: 1;
 }
 
@@ -1157,3 +1172,48 @@ body.dark-theme .theme-toggle-btn:hover {
         justify-content: center;
     }
 }
+
+/* estilos para iconos */
+
+.tech-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    transition: transform 0.2s;
+}
+
+.tech-icon-container {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 4px 8px 0;
+    padding: 4px 8px;
+    background: var(--bg-alt);
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.tech-icon-container:hover .tech-icon {
+    transform: scale(1.2);
+}
+
+.tech-more {
+    background: var(--bg-alt);
+    padding: 2px 6px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: var(--post-meta-light);
+}
+
+/* colores para cada tech*/
+
+.tech-icon.react {color: #61dafb; }
+.tech-icon.node {color: #68a063; }
+.tech-icon.html {color: #e34f26; }
+.tech-icon.css {color: #264de4; }
+.tech-icon.javascript {color: #f7df1e; }
+.tech-icon.mongodb {color: #47a248; }
+.tech-icon.express {color: #000000; }
+.tech-icon.redux {color: #764abc; }
+.tech-icon.firebase {color: #ffca28; }
+.tech-icon.laravel {color: #ff2d20; }
+.tech-icon.default {color: var(--text-main); }

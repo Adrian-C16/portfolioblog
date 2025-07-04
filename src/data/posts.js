@@ -1,39 +1,87 @@
-export const posts = [ // integrar proyectos en esta parte me sirve en este formato. 
-    {
-        id: 1,
-    title: 'Cómo empezar con React',
-    excerpt: 'Aprende los conceptos básicos de React y cómo crear tu primera aplicación.',
-    content: `
-      React es una biblioteca de JavaScript para construir interfaces de usuario. 
-      Puedes crear componentes reutilizables y gestionar el estado de forma eficiente. 
-      En este artículo veremos cómo empezar desde cero.
-    `,
-    date: '2025-06-18',
-    author: 'Juan Pérez'
-    },
+export const posts = [
+  {
+      id: 1,
+      title: 'Portfolio Personal',
+      excerpt: 'Sitio web personal para mostrar mis proyectos y habilidades como desarrollador frontend.',
+      content: `
+          Desarrollo de un portfolio personal moderno y responsive utilizando React, CSS Grid y Flexbox.
+          Incluye secciones para proyectos, habilidades y contacto, con un diseño limpio y accesible.
+      `,
+      image: '/images/portfolio-preview.jpg',
+      date: '2025-06-20',
+      technologies: ['React', 'CSS3', 'JavaScript', 'Responsive Design'],
+      tags: ['web', 'frontend', 'react'],
+      github: 'https://github.com/tuusuario/portfolio',
+      demo: 'https://tudominio.com',
+      features: [
+          'Diseño responsive',
+          'Modo oscuro/claro',
+          'Filtrado de proyectos',
+          'Animaciones suaves'
+      ]
+  },
+  {
+      id: 2,
+      title: 'E-commerce React',
+      excerpt: 'Plataforma de comercio electrónico desarrollada con React y Node.js.',
+      content: `
+          Aplicación completa de comercio electrónico con carrito de compras, autenticación de usuarios
+          y pasarela de pago integrada. Incluye panel de administración para gestión de productos.
+      `,
+      image: '/images/ecommerce-preview.jpg',
+      date: '2025-05-15',
+      technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'JWT'],
+      tags: ['web', 'fullstack', 'ecommerce'],
+      github: 'https://github.com/tuusuario/ecommerce',
+      demo: 'https://ecommerce.tudominio.com',
+      features: [
+          'Carrito de compras',
+          'Autenticación de usuarios',
+          'Pasarela de pago',
+          'Panel de administración'
+      ]
+  },
+  {
+      id: 3,
+      title: 'App del Clima',
+      excerpt: 'Aplicación del tiempo con pronóstico extendido usando API de OpenWeather.',
+      content: `
+          Aplicación meteorológica que muestra el clima actual y pronóstico a 5 días.
+          Incluye búsqueda por ciudad y geolocalización automática.
+      `,
+      image: '/images/weather-app.jpg',
+      date: '2025-04-10',
+      technologies: ['React', 'API REST', 'Geolocation API', 'CSS Modules'],
+      tags: ['web', 'frontend', 'api'],
+      github: 'https://github.com/tuusuario/weather-app',
+      demo: 'https://clima.tudominio.com',
+      features: [
+          'Pronóstico a 5 días',
+          'Búsqueda por ciudad',
+          'Geolocalización',
+          'Modo oscuro'
+      ]
+  },
+  {
+      id: 4,
+      title: 'Task Manager',
+      excerpt: 'Aplicación de gestión de tareas con autenticación y base de datos en tiempo real.',
+      content: `
+          Gestor de tareas colaborativo que permite a los usuarios crear, editar y eliminar tareas
+          en tiempo real. Incluye autenticación y autorización de usuarios.
+      `,
+      image: '/images/task-manager.jpg',
+      date: '2025-03-22',
+      technologies: ['React', 'Firebase', 'Material-UI', 'Redux'],
+      tags: ['web', 'firebase', 'productividad'],
+      github: 'https://github.com/tuusuario/task-manager',
+      demo: 'https://tasks.tudominio.com',
+      features: [
+          'Tiempo real con Firebase',
+          'Autenticación de usuarios',
+          'Interfaz intuitiva',
+          'Organización por proyectos'
+      ]
+  }
+];
 
-    {
-         id: 2,
-    title: 'Buenas prácticas con componentes',
-    excerpt: 'Organiza tu código y crea componentes reutilizables de forma eficiente.',
-    content: `
-      Separar componentes por funcionalidad, mantenerlos pequeños y legibles, 
-      usar nombres descriptivos y pasar props adecuadamente es clave para escalar una aplicación React.
-    `,
-    date: '2025-06-15',
-    author: 'María Gómez'
-
-    },
-
-    {
-        id: 3,
-    title: 'Estilos en React: CSS Modules vs Styled Components',
-    excerpt: '¿Cuál es la mejor forma de aplicar estilos en tus proyectos React?',
-    content: `
-      Tanto CSS Modules como Styled Components permiten encapsular estilos. 
-      La elección depende de tus preferencias, pero ambos ayudan a evitar colisiones de clases y mantener tu código organizado.
-    `,
-    date: '2025-06-12',
-    author: 'Carlos Ruiz'
-    }
-]

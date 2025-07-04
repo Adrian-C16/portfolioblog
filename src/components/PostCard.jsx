@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import TechIcon from "./TechIcon";
 import '../index.css'
 
 function PostCard({ post, onClick }) {
@@ -21,42 +22,25 @@ function PostCard({ post, onClick }) {
                     />
                 </div>
             )}
-            <div className="project-content">
-                <h2 className="project-title">{post.title}</h2>
-                <p className="project-excerpt">{post.excerpt}</p>
+                <div className="project-content">
+                    <h3 className="project-title">{post.title}</h3>
 
-                {post.tags && post.tags.length > 0 && (
-                    <div className="project-tags">
-                        {post.tags.map((tag, index) => (
-                            <span key={index} className="project-tag">
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
-                )}
-
-                <div className="project-links">
-                    <button
-                        onClick={handleDetailsClick}
-                        className="project-link"
-                    >
-                        Ver Detalles
-                    </button>
-                    {post.demo && (
-                        <a
-                            href={post.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="project-link demo-link"
-                            onClick={ (e) => e.stopPropagation()}
-                        >
-                            Ver Demo
-                        </a>
+                    {post.technologies?.length > 0 && (
+                        <div className="project-technologies">
+                            {post.technologies.slice(0, 3).map((tech, index) => (
+                                <TechIcon key={index} tech={tech} />
+                            ))}
+                        </div>
                     )}
                 </div>
-            </div>
-        </div>
+            </div>    
     );
-}
+}                 
+
+
+            
+
+            
+
 
 export default PostCard;
