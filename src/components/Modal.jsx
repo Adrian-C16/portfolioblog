@@ -1,94 +1,125 @@
 import { createPortal } from 'react-dom';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
+import { FaTimes, FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+import TechIcon from './TechIcon';
 
-function Modal ({ children, onClose }) {
+function Modal ({ project, onClose }) {
 
     const [isActive, setIsActive] = useState(false);
     const modalRef = useRef(null);
     const closeButtonRef = useRef(null);
 
-    useEffect(() => {
-        const modal = modalRef.current;
-        const closeButton = closeButtonRef.current;
+    const handleClose = useCallback(() => {
+        setIsActive(false);
+        setTimeout(onClose, 300);
+    }, [onClose]);
 
-        const timer = setTimeout(() => {
-            setIsActive(true);
-        }, 10);
-
+    useEffect(() => { //manejo teclado
         const handleKeyDown = (e) => {
-            if(e.key === 'Escape') {
-                handleClose();
-            }
-
-            else if (isActive && e.key === 'Tab') {
-                const focusableElements = modal.querySelectorAll (
-                    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-                );
-
-                if (focusableElements.length === 0) return;
-
-                const firstElement = focusableElements[0];
-                const lastElement = focusableElements[focusableElements.length - 1];
-
-                if (e.shiftKey) {
-                    if (document.activeElement === firstElement) {
-                        e.preventDefault();
-                        lastElement.focus();
-                    }
-                } else {
-                    if (document.activeElement === lastElement) {
-                        e.preventDefault();
-                        firstElement.focus();
-                    }
-                }
-            }
-        };
-
-        document.addEventListener('keydown', handleKeyDown);
-        if (closeButton) {
-            closeButton.focus();
+            if (e.key === 'Escape') handleClose();
         }
 
-        document.body.style.overflow = 'hidden';
+        document.addEventListener('keydown', handleKeyDown);
+        return () => document.removeEventListener('keydown', handleKeyDown);
+    }, [handleClose]);
 
-        return () => {
-            clearTimeout(timer);
-            document.removeEventListener('keydown', handleKeyDown);
-            document.body.style.overflow = 'unset';
-        };
-    }, [isActive]);
+    useEffect (() => { // animación entrada
+        const timer = setTimeout(() => setIsActive(true), 10);
+        return () => clearTimeout(timer);
+    }, []);
 
-    const handleClose = () => {
-        setIsActive(false);
-        setTimeout(() => {
-            onClose();
-        }, 300);
+    const handleBackdropClick = (e) => {
+        if (e.target === modalRef.current) {
+            handleClose();
+        }
     };
+
+    if (!project) return null;
+
+
 
     return createPortal (
         <div
             className={`modal-overlay ${isActive ? 'active' : ''}`}
-            onClick={handleClose}
+            onClick={handleBackdropClick}
             role='dialog'
             aria-modal='true'
             aria-labelledby='modal-title'
             ref={modalRef}
         >
-            <div
-                className='modal-content'
-                onClick={e => e.stopPropagation()}
-                role='document'
-            >
+            <div className='modal-content'>
                 <button
                     ref={closeButtonRef}
                     className='modal-close'
                     onClick={handleClose}
                     aria-label='Cerrar modal'
                 >
-                    &times;
+                    <FaTimes />
                 </button>
-                <h2 id='modal-title' className='sr-only'>Detalles del proyecto</h2>
-                {children}
+                <div className='modal-header'>
+                    <h2 id='modal-title' className='sr-only'>{project.title}</h2>
+                    <div className='modal-links'>
+                        {project.github && (
+                            <a
+                                href={project.github}
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                className='modal-link'
+                                aria-label='Ver código en Github'
+                            > <FaGithub /> Código</a>
+                        )}
+
+                        {project.demo && (
+                            <a
+                                href={project.demo}
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                className='modal-link'
+                                aria-label='Ver demo en vivo'
+                            > <FaExternalLinkAlt />Demo</a>
+                        )}
+                    </div>
+                    
+                </div>
+
+                <div className='modal-image-container'>
+                    <img
+                        src={project.image}
+                        alt={project.title}
+                        className='modal-image'
+                        onError={(e) => {
+                            e.target.onError = null;
+                            e.target.src = 'https://placehold.co/800x400/1a1a1a/ffffff?text=Imagen+no+disponible'
+                        }}
+                    />
+                </div>
+
+                <div className='modal-body'>
+                    <div className='modal-description'>
+                        <h3>Descripción</h3>
+                        <p>{project.content}</p>
+                    </div>
+
+                    <div className='modal-details'>
+                        <div className='modal-features'>
+                            <h3>Características</h3>
+                            <ul>
+                                {project.features?.map((feature, index) => (
+                                    <li key={index}>{feature}</li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div className='modal-technologies'>
+                            <h3>Tecnologías</h3>
+                            <div className='tech-stack'>
+                                {project.technologies?.map((tech, index) => (
+                                    <TechIcon key={index} tech={tech} />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>,
         document.body

@@ -32,7 +32,13 @@ function Home() {
     //manejador de eventos para la modal
     const handleProjectClick = (project) => {
         setSelectedProject(project);
-    }  
+        document.body.style.overflow = 'hidden'; //deshabilito scroll
+    };
+
+    const handleCloseModal = () => {
+        setSelectedProject(null);
+        document.body.style.overflow = ''; //restauro scroll
+    }
 
     return (
         <div className='home'>
@@ -95,54 +101,10 @@ function Home() {
             </section>
 
             {selectedProject && (
-                <Modal onClose={() => setSelectedProject(null)}>
-                    <div className='project-detail-modal'>
-                        <h2>{selectedProject.title}</h2>
-                        {selectedProject.image && (
-                            <img
-                                src={selectedProject.image}
-                                alt={selectedProject.title}
-                                className='modal-project-image'
-                            />
-                        )}
-                        <div className='project-meta'>
-                            {selectedProject.tags?.length > 0 && (
-                                <div className='project-tags'>
-                                    {selectedProject.tags.map((tag, index) => {
-                                        <span key={index} className='project-tag'>{tag}</span>
-                                    })}
-                                </div>
-                            )}
-                        </div>
-                        <div className='project-content'>
-                            <p>{selectedProject.content || selectedProject.excerpt}</p>
-                        </div>
-
-                        {selectedProject.technologies?.length > 0 && (
-                            <div className='project-technologies'>
-                                <h4>Tecnologías utilizadas:</h4>
-                                <div className='tech-tags'>
-                                    {selectedProject.technologies.map((tech, index) =>(
-                                        <span key={index} className='tech-tag'>{tech}</span>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        <div className='project-links'>
-                            {selectedProject.github && (
-                                <a href={selectedProject.github} target='_blank' rel='noopener noreferrer' className='project-link'>
-                                    Ver en GitHub
-                                </a>
-                            )}
-                            {selectedProject.demo && (
-                                <a href={selectedProject.demo} target='_blank' rel='noopener noreferrer' className='project-link demo-link'>
-                                    Ver Demo
-                                </a>
-                            )}
-                        </div>
-                    </div>
-                </Modal>
+                <Modal 
+                    project={selectedProject}
+                    onClose={handleCloseModal}
+                />
             )}
         </div>
     );
