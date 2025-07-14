@@ -17,7 +17,7 @@ function Navbar () {
                 </Link>
                 <div className='navbar-links'>
                     <Link to = "/">Inicio</Link>
-                    <Link to = "/new">Crear Post</Link>
+                    <Link to = "/new">Crear Proyecto</Link>
                     <Link to = "/admin">Administrar</Link>
                     <button onClick={toggleTheme} className='theme-toggle-btn' aria-label='Cambiar tema'>
                         {theme === "light" ? (<svg width="20" height="20" fill='none' stroke='currentColor' strokeWidth="2">

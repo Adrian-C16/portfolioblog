@@ -925,6 +925,15 @@ body.dark-theme .theme-toggle-btn:hover {
 
 /* Estilos para Modal */
 
+[data-portal] {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+}
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -932,22 +941,13 @@ body.dark-theme .theme-toggle-btn:hover {
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     z-index: 1000;
-    padding: 2rem 1rem;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
-    overflow-y: auto;
-}
-
-@supports (backdrop-filter: blur(5px)) or (-webkit-backdrop-filter: blur(5px)) {
-    .modal-overlay {
-        background-color: rgba(0, 0, 0, 0.5);
-    }
 }
 
 .modal-overlay.active {
@@ -956,18 +956,14 @@ body.dark-theme .theme-toggle-btn:hover {
 }
 
 .modal-content {
-    background: var(--card-bg);
-    border-radius: 12px;
-    max-width: 900px;
-    width: 100%;
+    background: var(--bg-main);
+    width: 90%;
+    max-width: 800px;
+    border-radius: 8px;
+    position: relative;
     max-height: 90vh;
     overflow-y: auto;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transform: translateY(20px);
-    opacity: 0;
-    transition: transform 0.3s ease;
-    border: 1px solid var(--card-border);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .modal-overlay:not(.active) .modal-content {
@@ -1072,7 +1068,7 @@ body.dark-theme .theme-toggle-btn:hover {
     padding: 0.5rem 1rem;
     background: var(--bg-alt);
     border-radius: 6px;
-    color: var(--text-main-);
+    color: var(--text-main);
     text-decoration: none;
     transition: all 0.2s ease;
     border: 1px solid var(--form-border);
@@ -1141,7 +1137,7 @@ body.dark-theme .theme-toggle-btn:hover {
     margin-top: 0.5rem;
 }
 
-/*reponsivo modal */
+/*reponsivo modal*/
 @media (max-width: 768px) {
     .modal-details {
         grid-template-columns: 1fr;
@@ -1267,8 +1263,6 @@ body.dark-theme .theme-toggle-btn:hover {
 .project-link.demo-link:hover {
     background: rgba(49, 130, 206, 0.1);
 }
-
-
 
 /*responsive modal*/
 @media (max-width: 768px) {

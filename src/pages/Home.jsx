@@ -24,13 +24,12 @@ function Home() {
             selectedTag === 'todos' ||
             (post.tags && post.tags.includes(selectedTag));
     
-      
-            
-    return matchesSearch && matchesTag;
+        return matchesSearch && matchesTag;
     });
 
     //manejador de eventos para la modal
     const handleProjectClick = (project) => {
+        console.log('Project click:', project);
         setSelectedProject(project);
         document.body.style.overflow = 'hidden'; //deshabilito scroll
     };
@@ -52,6 +51,7 @@ function Home() {
                         <div className='search-box'>
                             <input
                                 type='text'
+                                id='search-box'
                                 placeholder='Buscar proyectos...'
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -60,6 +60,7 @@ function Home() {
 
                         <div className='tag-filter'>
                             <select
+                                id='select'
                                 value={selectedTag}
                                 onChange={(e) => setSelectedTag(e.target.value)}
                             >
@@ -79,7 +80,7 @@ function Home() {
                             <PostCard 
                                 key={post.id} 
                                 post={post}
-                                onClick={() => handleProjectClick(post)}
+                                onClick={handleProjectClick}
                             />
                         ))}
                     </div>
@@ -100,6 +101,7 @@ function Home() {
                 )}
             </section>
 
+            {/* Asegurar que la modal se muestre correctamente */}
             {selectedProject && (
                 <Modal 
                     project={selectedProject}

@@ -23,9 +23,9 @@ function Modal ({ project, onClose }) {
         return () => document.removeEventListener('keydown', handleKeyDown);
     }, [handleClose]);
 
-    useEffect (() => { // animación entrada
-        const timer = setTimeout(() => setIsActive(true), 10);
-        return () => clearTimeout(timer);
+    // Asegurar que la modal se muestre al montar
+    useEffect(() => {
+        setIsActive(true);
     }, []);
 
     const handleBackdropClick = (e) => {
@@ -34,9 +34,13 @@ function Modal ({ project, onClose }) {
         }
     };
 
-    if (!project) return null;
+    
+    if (!project) {
+        console.log('Modal recibiendo project null');
+        return null;
+    }
 
-
+    console.log('Modal recibiendo project:', project);
 
     return createPortal (
         <div
@@ -46,6 +50,7 @@ function Modal ({ project, onClose }) {
             aria-modal='true'
             aria-labelledby='modal-title'
             ref={modalRef}
+            style={{ display: isActive ? 'flex' : 'none' }} // Asegurar que se muestre
         >
             <div className='modal-content'>
                 <button
@@ -97,7 +102,7 @@ function Modal ({ project, onClose }) {
                 <div className='modal-body'>
                     <div className='modal-description'>
                         <h3>Descripción</h3>
-                        <p>{project.content}</p>
+                        <p>{project.content || project.excerpt || 'Sin descripción'}</p>
                     </div>
 
                     <div className='modal-details'>

@@ -140,6 +140,7 @@ function PostForm ({isEditing = false}) {
                 <input
                     type="text"
                     name="title"
+                    id="title"
                     value={formData.title}
                     onChange={handleChange}
                     required
@@ -150,6 +151,7 @@ function PostForm ({isEditing = false}) {
                 <label>Extracto</label>
                 <textarea
                     name="excerpt"
+                    id="excerpt"
                     value={formData.excerpt}
                     onChange={handleChange}
                     rows="3"
@@ -158,6 +160,7 @@ function PostForm ({isEditing = false}) {
                 <label>Contenido</label>
                 <textarea
                     name="content"
+                    id="content"
                     value={formData.content}
                     onChange={handleChange}
                     rows="7"
@@ -171,6 +174,7 @@ function PostForm ({isEditing = false}) {
                     <input
                         type="date"
                         name="date"
+                        id="date"
                         value={formData.date}
                         onChange={handleChange}
                         className={errors.date ? 'error-input' : ''}
@@ -183,6 +187,7 @@ function PostForm ({isEditing = false}) {
                     <input
                         type="text"
                         name="author"
+                        id="author"
                         value={formData.author}
                         onChange={handleChange}
                         className={errors.author ? 'error-input' : ''}
@@ -195,6 +200,7 @@ function PostForm ({isEditing = false}) {
                     <input
                         type="url"
                         name="image"
+                        id="image"
                         value={formData.image}
                         onChange={handleChange}
                         placeholder="https://ejemplo.com/imagen.jpg"
@@ -219,6 +225,7 @@ function PostForm ({isEditing = false}) {
                 <input
                     type="text"
                     name="tags"
+                    id="tags"
                     value={formData.tags}
                     onChange={handleChange}
                     placeholder="react, javascript, portfolio"
@@ -229,6 +236,7 @@ function PostForm ({isEditing = false}) {
                     <input
                         type="url"
                         name="repo"
+                        id="repo"
                         value={formData.repo}
                         onChange={handleChange}
                         placeholder="https://github.com/usuario/repositorio"
@@ -242,6 +250,7 @@ function PostForm ({isEditing = false}) {
                     <input
                         type="url"
                         name="demo"
+                        id="demo"
                         value={formData.demo}
                         onChange={handleChange}
                         placeholder="https://midemo.com"
