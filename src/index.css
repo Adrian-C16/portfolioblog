@@ -614,64 +614,267 @@ body, .home, .post-detail, .post-form, .admin-panel {
 
 /* Admin Panel */
 .admin-panel {
-    max-width: 1000px;
-    margin: 2rem auto;
-    padding: 1rem;
-    font-family: Arial, Helvetica, sans-serif;
-}
-.admin-panel h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-}
-.admin-actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 1rem;
-}
-.admin-button {
-    background-color: var(--form-btn);
-    color: white;
-    padding: 0.5rem 0.8rem;
-    border: none;
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 4px;
-    margin-right: 0.5rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.admin-button:hover {
-    background-color: var(--form-btn-hover);
-}
-.admin-button.small {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.9rem;
-}
-.admin-button.danger {
-    background-color: var(--danger-btn);
-}
-.admin-button.danger:hover {
-    background-color: var(--danger-btn-hover);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.admin-title {
+    font-size: 2rem;
+    color: var(--text-strong);
+    margin: 0;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.admin-search {
+    margin-bottom: 2rem;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--form-border);
+    border-radius: 6px;
+    background: var(--bg-alt);
+    color: var(--text-main);
+    transition: all 0.2s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--form-btn);
+    box-shadow: 0 0 0 2px var(--bg-alt);
+}
+
+
+.admin-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    background: var(--form-bg);
+    color: var(--text-main);
+    border: 1px solid var(--form-border);
+}
+
+.admin-button:hover {
+    background: var(--toggle-hover);
+    color: var(--text-strong);
+}
+
+.admin-button:active {
+    transform: scale(0.98);
+}
+
+.admin-button.primary {
+    background: var(--form-btn);
+    color: white;
+    border-color: var(--form-btn);
+}
+
+.admin-button.primary:hover {
+    background: var(--form-btn-hover);
+}
+
+.admin-button.edit {
+    background: var(--bg-alt);
+    color: var(--text-main);
+}
+
+.admin-button.edit:hover {
+    background: var(--toggle-hover);
+}
+
+.admin-button.delete {
+    background: var(--danger-btn);
+    color: white;
+    border-color: var(--danger-btn);
+}
+
+.admin-button.delete:hover {
+    background: var(--danger-btn-hover);
+}
+
+.admin-button i {
+    font-size: 1.1rem;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.admin-actions .admin-button {
+    width: fit-content;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-actions {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .admin-actions .admin-button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+.error-message {
+    background: var(--danger-btn);
+    color: white;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-main);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+}
+
+.empty-state-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.empty-state p {
+    margin: 0;
+    color: var(--text-main);
+}
+
+.empty-state-subtext {
+    color: var(--text-logo-span);
+    font-size: 0.9rem;
+}
+
+/*reponsive admin */
+
+@media (max-width: 768px) {
+    .admin-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .admin-actions {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .admin-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .admin-row td {
+        white-space: nowrap;
+    }
+}
 /* Admin Table */
 .admin-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--bg-main);
+    box-shadow: 0 2px 4px rgba(0,0,0, 0.1);
+    border-radius: 8px;
 }
-.admin-table th,
-.admin-table td {
-    padding: 0.75rem;
-    border-bottom: 1px solid var(--admin-table-border);
-    text-align: left;
-}
+
 .admin-table th {
-    background-color: var(--admin-table-header-bg);
+    background: var(--bg-alt);
+    padding: 1rem;
+    text-align: left;
+    color: var(--text-strong);
     font-weight: 600;
+    border-bottom: 2px solid var(--form-border);
+    border-top-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
+
+.admin-row {
+    transition: background-color 0.2s ease;
+}
+
+.admin-row:hover {
+    background-color: var(--bg-alt);
+}
+
+.admin-row td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--form-border);
+}
+
+.admin-row:last-child td {
+    border-bottom: none;
+}
+
 .admin-table td {
     background-color: var(--card-bg);
     color: var(--text-main);
+}
+
+/* Columna de acciones */
+.admin-table td.actions {
+    white-space: nowrap;
+    min-width: 120px;
+    width: 120px;
+}
+
+.admin-table td.actions .admin-button {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.9rem;
+}
+
+.admin-table td.actions .admin-button.edit {
+    margin-right: 0.5rem;
+}
+
+.admin-table td.actions .admin-button.danger {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-table td.actions {
+        min-width: 120px;
+        width: 120px;
+    }
+    
+    .admin-table td.actions .admin-button {
+        display: inline-block;
+        margin: 0.25rem;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
 }
 
 /* Theme toggle */
@@ -963,7 +1166,7 @@ body.dark-theme .theme-toggle-btn:hover {
     position: relative;
     max-height: 90vh;
     overflow-y: auto;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0, 0.1);
 }
 
 .modal-overlay:not(.active) .modal-content {
